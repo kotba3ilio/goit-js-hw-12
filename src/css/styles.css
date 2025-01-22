@@ -1,0 +1,101 @@
+@import "izitoast/dist/css/iziToast.min.css";
+@import "simplelightbox/dist/simple-lightbox.min.css";
+
+.form {
+  width: 480px;
+  margin: 10px auto;
+}
+
+.search {
+  width: 272px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #808080;
+  padding: 8px 15px;
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  color: #808080;
+  margin-right: 8xp;
+}
+
+.search:hover {
+  border: 1px solid #000000;
+}
+
+.search:focus {
+  outline: none;
+  border: 1px solid #4E75FF;
+}
+
+.submit {
+  width: 91px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #4E75FF;
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  border: none;
+}
+
+.submit:hover {
+  background-color: #6C8CFF;
+}
+
+.gallery {
+  width: 1128px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: space-between;
+  padding: 24px;
+  list-style: none;
+}
+
+.gallery-image {
+  width: 360px;
+  height: 200px;
+}
+
+.gallery-link:hover {
+  cursor: pointer;
+}
+
+.loader {
+  width: 250px;
+  margin: 10px auto;
+  display: none;
+}
+
+.statistic {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin-top: 4px;
+}
+
+.statistic-title {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  color: #2E2F42;
+  text-align: center;
+}
+
+.statistic-text {
+  font-family: Montserrat;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  color: #2E2F42;
+  text-align: center;
+}
