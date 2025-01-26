@@ -15,12 +15,16 @@
         type="text"
         class="search"
         id="search"
+        required
         placeholder="Search images..."
       />
-      <button class="submit">Start</button>
+      <button type="button" class="button">Start</button>
     </form>
     <div class="loader-wrapper"><div class="loader"></div></div>
     <ul class="gallery"></ul>
+    <button type="button" class="button block hidden" id="load-more">
+      Add more
+    </button>
     <script type="module" src="./main.js"></script>
   </body>
 </html>

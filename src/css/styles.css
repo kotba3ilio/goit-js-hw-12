@@ -29,7 +29,12 @@
   border: 1px solid #4E75FF;
 }
 
-.submit {
+.error,
+.error:focus {
+  border: 1px solid #ffafb4;
+}
+
+.button {
   width: 91px;
   height: 40px;
   border-radius: 8px;
@@ -98,4 +103,13 @@
   letter-spacing: 0.04em;
   color: #2E2F42;
   text-align: center;
+}
+
+.block {
+  display: block;
+  margin: 10px auto;
+}
+
+.hidden {
+  display: none;
 }

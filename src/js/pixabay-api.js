@@ -1,24 +1,18 @@
-import iziToast from 'izitoast';
+import axios from 'axios';
 
-export const searchImages = text => {
-  const options = {
-    method: 'get',
-  };
-  const params = new URLSearchParams({
-    key: '48321806-d480a24496502db5d22ba5dda',
-    image_type: 'photo',
-    orientation: 'hotizontal',
-    safesearch: true,
-    q: text,
+axios.defaults.baseURL = 'https://pixabay.com/';
+
+export const searchImages = async (text, page) => {
+  const response = await axios.get('api/', {
+    params: {
+      key: '48321806-d480a24496502db5d22ba5dda',
+      image_type: 'photo',
+      orientation: 'hotizontal',
+      safesearch: true,
+      q: text,
+      page: page,
+      per_page: 15,
+    },
   });
-  return fetch(`https://pixabay.com/api/?${params.toString()}`, options)
-    .then(response => {
-      if (!response.ok) {
-        throw response.status;
-      }
-      return response.json();
-    })
-    .catch(error => {
-      iziToast.error({ title: 'Error', message: error });
-    });
+  return response.data;
 };
