@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/goit-js-hw-11/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/goit-js-hw-12/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla App Template</title>
-    <script type="module" crossorigin src="/goit-js-hw-11/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-B07T6_gy.js">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/index-B5dyVXyB.css">
+    <script type="module" crossorigin src="/goit-js-hw-12/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-3h0fHshV.js">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/index-BfE0dbNf.css">
   </head>
   <body>
     <form class="form">
@@ -15,11 +15,15 @@
         type="text"
         class="search"
         id="search"
+        required
         placeholder="Search images..."
       />
-      <button class="submit">Start</button>
+      <button type="button" class="button">Start</button>
     </form>
     <div class="loader-wrapper"><div class="loader"></div></div>
     <ul class="gallery"></ul>
+    <button type="button" class="button block hidden" id="load-more">
+      Add more
+    </button>
   </body>
 </html>
