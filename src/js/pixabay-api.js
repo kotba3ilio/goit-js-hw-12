@@ -14,5 +14,5 @@ export const searchImages = async (text, page) => {
       per_page: 15,
     },
   });
-  return response.data;
+  return response;
 };

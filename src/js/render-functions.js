@@ -1,22 +1,10 @@
 import { searchImages } from '/js/pixabay-api';
 import SimpleLightbox from 'simplelightbox';
-import iziToast from 'izitoast';
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
-
-const options = {
-  searchString: '',
-  pageNumber: 1,
-  images: [],
-};
-
-const gallery = document.querySelector('.gallery');
-const loader = document.querySelector('.loader-wrapper');
-const loadMore = document.querySelector('#load-more');
-const searchInut = document.querySelector('#search');
 
 function createGalleryItem(item) {
   return `<li>
@@ -44,57 +32,33 @@ function createGalleryItem(item) {
   </li>`;
 }
 
-export function reset(searchString) {
-  options.pageNumber = 1;
-  options.images = [];
-  options.searchString = searchString;
-  gallery.innerHTML = '';
-  searchInut.classList.remove('error');
-}
+export const galleryOptiopns = {
+  searchString: '',
+  pageNumber: 1,
+  images: [],
+  totalHits: 0,
+};
 
-export function renderGallery() {
-  try {
-    if (!options.searchString) {
-      throw 'Search value can not be null';
+export async function renderGallery(gallery, options) {
+  await searchImages(options.searchString, options.pageNumber).then(
+    response => {
+      const { data: data } = response;
+      if (data.hits.length == 0) {
+        throw 'Sorry, there are no images matching your search query. Please try again!';
+      }
+      options.images.push(...data.hits);
+      const galleryItems = options.images
+        .map(item => {
+          return createGalleryItem(item);
+        })
+        .join('');
+      gallery.innerHTML = galleryItems;
+      lightbox.refresh();
+      scrol(gallery.children[gallery.children.length - 1]);
+      options.pageNumber += 1;
+      options.totalHits = data.totalHits;
     }
-    loader.style.display = 'block';
-    const result = searchImages(options.searchString, options.pageNumber);
-    result
-      .then(data => {
-        options.images.push(...data.hits);
-        if (options.images.length == 0) {
-          throw 'Sorry, there are no images matching your search query. Please try again!';
-        }
-        const galleryItems = options.images
-          .map(item => {
-            return createGalleryItem(item);
-          })
-          .join('');
-        gallery.innerHTML = galleryItems;
-        lightbox.refresh();
-        options.pageNumber++;
-        scrol(gallery.children[gallery.children.length - 1]);
-        if (options.images.length < data.totalHits) {
-          loadMore.classList.remove('hidden');
-        } else {
-          loadMore.classList.add('hidden');
-          iziToast.info({
-            message:
-              "We're sorry, but you've reached the end of search results.",
-          });
-        }
-      })
-      .catch(error => {
-        iziToast.error({ title: 'Error', message: error });
-      })
-      .finally(() => {
-        loader.style.display = 'none';
-      });
-  } catch (error) {
-    searchInut.classList.add('error');
-    searchInut.focus;
-    iziToast.error({ message: error });
-  }
+  );
 }
 
 function scrol(li) {
