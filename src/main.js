@@ -30,6 +30,7 @@ async function createGallery() {
     }
   } catch (error) {
     iziToast.error({ title: 'Error', message: error });
+    loadMoreBtn.classList.add('hidden');
   } finally {
     loader.style.display = 'none';
   }

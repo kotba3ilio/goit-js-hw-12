@@ -37,35 +37,38 @@ export const galleryOptiopns = {
   pageNumber: 1,
   images: [],
   totalHits: 0,
+  pageSize: 15,
 };
 
 export async function renderGallery(gallery, options) {
-  await searchImages(options.searchString, options.pageNumber).then(
-    response => {
-      const { data: data } = response;
-      if (data.hits.length == 0) {
-        throw 'Sorry, there are no images matching your search query. Please try again!';
-      }
-      options.images.push(...data.hits);
-      const galleryItems = options.images
-        .map(item => {
-          return createGalleryItem(item);
-        })
-        .join('');
-      gallery.innerHTML = galleryItems;
-      lightbox.refresh();
-      scrol(gallery.children[gallery.children.length - 1]);
-      options.pageNumber += 1;
-      options.totalHits = data.totalHits;
+  await searchImages(
+    options.searchString,
+    options.pageNumber,
+    options.pageSize
+  ).then(response => {
+    const { data: data } = response;
+    if (data.hits.length == 0) {
+      throw 'Sorry, there are no images matching your search query. Please try again!';
     }
-  );
+    options.images.push(...data.hits);
+    const galleryItems = options.images
+      .map(item => {
+        return createGalleryItem(item);
+      })
+      .join('');
+    gallery.innerHTML = galleryItems;
+    lightbox.refresh();
+    scrol(gallery.children[gallery.children.length - options.pageSize + 1]);
+    options.pageNumber += 1;
+    options.totalHits = data.totalHits;
+  });
 }
 
 function scrol(li) {
   const rect = li.getBoundingClientRect();
   window.scrollBy({
-    top: rect.top,
-    height: rect.height,
+    top: rect.bottom,
+    height: rect.height * 2,
     behavior: 'smooth',
   });
 }
